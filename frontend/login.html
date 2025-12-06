@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Login - Kiyamid College</title>
+  <link rel="shortcut icon" href="image/logo.png" type="image/png" />
+  <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    #togglePassword {
+      border-left: none;
+      cursor: pointer;
+    }
+    
+    #togglePassword:focus {
+      box-shadow: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <img src="image/logo.png" alt="Logo" width="40" height="40" class="me-2" />
+        KEA-MED COLLEGE
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="news.html">News</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="admission.html">Admission</a></li>
+          <li class="nav-item"><a class="nav-link" href="academics.html">Academics</a></li>
+          <li class="nav-item"><a class="nav-link" href="research.html">Research</a></li>
+          <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+          <li class="nav-item"><a class="nav-link" href="comments.html">Feedback</a></li>
+          <li class="nav-item"><a class="nav-link active" href="login.html">Login</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Login Form -->
+  <div class="container py-5 my-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card shadow-xl">
+          <div class="card-body p-5">
+            <div class="text-center mb-4">
+              <i class="fas fa-lock fa-3x text-primary mb-3"></i>
+              <h2>Administrator Login</h2>
+              <p class="text-muted">Enter your credentials to access the admin panel</p>
+            </div>
+
+            <div id="alertBox"></div>
+
+            <form id="loginForm">
+              <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <div class="input-group">
+                  <span class="input-group-text"><i class="fas fa-user"></i></span>
+                  <input type="text" class="form-control" id="username" required />
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <div class="input-group">
+                  <span class="input-group-text"><i class="fas fa-key"></i></span>
+                  <input type="password" class="form-control" id="password" required />
+                  <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                    <i class="fas fa-eye"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="rememberMe" />
+                <label class="form-check-label" for="rememberMe">Remember me</label>
+              </div>
+              <div class="d-grid">
+                <button type="submit" class="btn btn-primary btn-lg">Login</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div class="text-center mt-4">
+          <p>
+            <a href="index.html" class="text-decoration-none">
+              <i class="fas fa-arrow-left me-2"></i>Back to Homepage
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hidden Admin Access Area -->
+  <div id="adminAccessTrigger" style="position: fixed; bottom: 10px; right: 10px; width: 20px; height: 20px; background: transparent; cursor: pointer; z-index: 9999;" title="Admin Access"></div>
+
+  <!-- Footer -->
+  <footer class="bg-primary text-white py-4">
+    <div class="container text-center">
+        <div class="container footer">
+          <div class="row">
+            <div class="col-md-4">
+                    <h5>Kea-Med College</h5>
+                    <p class="small">Excellence in Medical Education Since 1999</p>
+                    <p class="small">Medical College Debre Birhan Campus </p>
+                    <p class="small"><b>Contact:</b> <a href="https://mail.google.com/mail/?view=cm&fs=1&to=info@keamedcollegedb@gmail.com" target="_blank" class="text-white">keamedcollegedb@gmail.com</a> </p>
+                    <p class="small"><B>Phone: 011 681 3528</B></p>
+            </div>
+            <div class="col-md-4">
+              <h5>Quick Links</h5>
+              <ul class="list-unstyled footer-links">
+                <li><a href="index.html"><i class="fas fa-angle-right me-2"></i>Home</a></li>
+                <li><a href="about.html"><i class="fas fa-angle-right me-2"></i>About Us</a></li>
+                <li><a href="admission.html"><i class="fas fa-angle-right me-2"></i>Admissions</a></li>
+                <li><a href="comments.html"><i class="fas fa-angle-right me-2"></i>Contact & Feedback</a></li>
+              </ul>
+              <div class="mt-3 social">
+                <a href="#" class="me-3"><i class="fab fa-facebook fa-lg"></i></a>
+                <a href="#" class="me-3"><i class="fab fa-twitter fa-lg"></i></a>
+                <a href="#" class="me-3"><i class="fab fa-linkedin fa-lg"></i></a>
+                <a href="#"><i class="fab fa-instagram fa-lg"></i></a>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <h5>Our Location</h5>
+              <div class="ratio ratio-16x9 mb-2">
+                <iframe src="https://maps.google.com/maps?q=Kea%20Med%20College&output=embed" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+              </div>
+              <p class="small"><a href="https://maps.app.goo.gl/GXQb63d85wi9L3yG7" target="_blank" rel="noopener noreferrer" class="text-white">Open in Google Maps</a></p>
+            </div>
+          </div>
+          <hr class="my-3">
+          <div class="text-center small">
+            <p>&copy; 2025 Kea Med College. All rights reserved.</p>
+          </div>
+        </div>
+    </div>
+  </footer>
+
+  <script src="js/scroll-to-top.js"></script>
+  <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- ✅ Auth Script -->
+  <script>
+    const API_BASE_URL = "http://localhost:3002/api"; // Update if backend runs elsewhere
+
+    async function login(event) {
+      event.preventDefault();
+      const username = document.getElementById("username").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const alertBox = document.getElementById("alertBox");
+
+      try {
+        const res = await fetch(`${API_BASE_URL}/auth/login`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ username, password }),
+        });
+        const data = await res.json();
+        if (!res.ok) {
+          alertBox.innerHTML = `<div class="alert alert-danger">${data.message || "Invalid credentials"}</div>`;
+          return;
+        }
+
+        // Store token locally
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("username", username);
+        alertBox.innerHTML = `<div class="alert alert-success">Login successful! Redirecting...</div>`;
+        setTimeout(() => {
+          window.location.href = "admin.html"; // Redirect to your admin page
+        }, 1200);
+      } catch (error) {
+        console.error("Login error:", error);
+        alertBox.innerHTML = '<div class="alert alert-danger">Server error. Try again later.</div>';
+      }
+    }
+
+    document.getElementById("loginForm").addEventListener("submit", login);
+    
+    // Set up hidden admin access
+    function setupHiddenAdminAccess() {
+        const adminTrigger = document.getElementById('adminAccessTrigger');
+        
+        // Double-click on the hidden trigger to access admin login
+        adminTrigger.addEventListener('dblclick', function() {
+            // Since we're already on the login page, we could redirect to admin page if already logged in
+            const token = localStorage.getItem('token');
+            if (token) {
+                window.location.href = 'admin.html';
+            }
+        });
+        
+        // Keyboard shortcut: Ctrl+Shift+A to access admin area
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.shiftKey && e.key === 'A') {
+                e.preventDefault();
+                const token = localStorage.getItem('token');
+                if (token) {
+                    window.location.href = 'admin.html';
+                }
+            }
+        });
+    }
+    
+    // Password visibility toggle
+    function setupPasswordToggle() {
+        const togglePassword = document.getElementById('togglePassword');
+        const password = document.getElementById('password');
+        
+        togglePassword.addEventListener('click', function() {
+            // Toggle the type attribute
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+            
+            // Toggle the eye icon
+            const eyeIcon = this.querySelector('i');
+            if (type === 'password') {
+                eyeIcon.classList.remove('fa-eye-slash');
+                eyeIcon.classList.add('fa-eye');
+            } else {
+                eyeIcon.classList.remove('fa-eye');
+                eyeIcon.classList.add('fa-eye-slash');
+            }
+        });
+    }
+    
+    // Initialize when DOM is loaded
+    document.addEventListener('DOMContentLoaded', function() {
+        setupHiddenAdminAccess();
+        setupPasswordToggle();
+    });
+  </script>
+</body>
+</html>

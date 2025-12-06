@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News - Kea Med College</title>
+    <link rel="shortcut icon" href="image/logo.png" type="image/png">
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* News card styling */
+        .news-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+        }
+        
+        .news-card .card-img-top {
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .news-card:hover .image-overlay {
+            opacity: 1;
+        }
+        
+        .image-overlay i {
+            color: white;
+            font-size: 2rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease 0.1s;
+        }
+        
+        .news-card:hover .image-overlay i {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Date styling */
+        .news-date {
+            display: inline-flex;
+            align-items: center;
+            background: #e7f3ff;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        .news-date i {
+            margin-right: 5px;
+        }
+        
+        /* Read More button styling */
+        .btn-read-more {
+            background: #0d6efd;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+        
+        .btn-read-more:hover {
+            background: #0b5ed7;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        /* Animation for new content */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-element {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        .animate-element:nth-child(2) { animation-delay: 0.1s; }
+        .animate-element:nth-child(3) { animation-delay: 0.2s; }
+        .animate-element:nth-child(4) { animation-delay: 0.3s; }
+        .animate-element:nth-child(5) { animation-delay: 0.4s; }
+        .animate-element:nth-child(6) { animation-delay: 0.5s; }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+               <img src="image/logo.png" alt="Logo" width="40" height="40" class="me-2">
+                KEA-MED COLLEGE
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="news.html">News</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="admission.html">Admission</a></li>
+                    <li class="nav-item"><a class="nav-link" href="academics.html">Academics</a></li>
+                    <li class="nav-item"><a class="nav-link" href="research.html">Research</a></li>
+                    <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="comments.html">Feedback</a></li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header bg-primary text-white py-5 mt-5 animate-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="display-4">College News & Events</h1>
+                    <p class="lead">Stay updated with the latest announcements and happenings at Kea Med College</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container py-5">
+        <!-- Hidden Admin Access Area -->
+        <div id="adminAccessTrigger" style="position: fixed; bottom: 10px; right: 10px; width: 20px; height: 20px; background: transparent; cursor: pointer; z-index: 9999;" title="Admin Access"></div>
+        
+        <!-- Dependency Check -->
+        <div id="dependencyCheck" class="alert alert-info" style="display: none;">
+            <i class="fas fa-info-circle me-2"></i>
+            <span>This page depends on the homepage for proper functionality.</span>
+        </div>
+        
+        <!-- News Section -->
+        <div class="row animate-section" id="newsContainer">
+            <!-- News items loaded via JavaScript -->
+        </div>
+
+        <!-- Admin Add News Button (only visible when logged in) -->
+        <div id="adminNewsControls" class="mt-5 text-center animate-element" style="display: none;">
+            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addNewsModal">
+                <i class="fas fa-plus"></i> Add News Article
+            </button>
+        </div>
+    </div>
+
+   
+    <!-- Footer -->
+    <footer class="bg-primary text-white py-3">
+        <div class="container footer">
+            <div class="row">
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <h5>Kea-Med College</h5>
+                    <p class="small">Excellence in Medical Education Since 1999</p>
+                    <p class="small">Medical College Debre Birhan Campus </p>
+                    <p class="small"><b>Contact:</b> <a href="https://mail.google.com/mail/?view=cm&fs=1&to=info@keamedcollegedb@gmail.com" target="_blank" class="text-white">keamedcollegedb@gmail.com</a> </p>
+                    <p class="small"><B>Phone: 011 681 3528</B></p>
+                    <div class="mt-2">
+                        <a href="https://www.facebook.com" target="_blank" class="me-2 social-icon"><i class="fab fa-facebook fa-lg"></i></a>
+                        <a href="https://www.twitter.com" target="_blank" class="me-2 social-icon"><i class="fab fa-twitter fa-lg"></i></a>
+                        <a href="https://www.linkedin.com" target="_blank" class="me-2 social-icon"><i class="fab fa-linkedin fa-lg"></i></a>
+                        <a href="https://www.instagram.com" target="_blank" class="me-2 social-icon"><i class="fab fa-instagram fa-lg"></i></a>
+                        <a href="https://www.tiktok.com" target="_blank" class="social-icon"><i class="fab fa-tiktok fa-lg"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled footer-links">
+                        <li><a href="index.html"><i class="fas fa-angle-right me-2"></i>Home</a></li>
+                        <li><a href="about.html"><i class="fas fa-angle-right me-2"></i>About Us</a></li>
+                        <li><a href="admission.html"><i class="fas fa-angle-right me-2"></i>Admissions</a></li>
+                        <li><a href="academics.html"><i class="fas fa-angle-right me-2"></i>Academics</a></li>
+                        <li><a href="research.html"><i class="fas fa-angle-right me-2"></i>Research</a></li>
+                        <li><a href="services.html"><i class="fas fa-angle-right me-2"></i>Services</a></li>
+                        <li><a href="comments.html"><i class="fas fa-angle-right me-2"></i>Contact & Feedback</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Our Location</h5>
+                    <div class="ratio ratio-16x9 mb-2">
+                        <iframe src="https://maps.google.com/maps?q=Kea%20Med%20College&output=embed" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                    <p class="small"><a href="https://maps.app.goo.gl/GXQb63d85wi9L3yG7" target="_blank" rel="noopener noreferrer" class="text-white">Open in Google Maps</a></p>
+                </div>
+            </div>
+            <hr class="my-3">
+            <div class="text-center copyright position-relative">
+                <p class="mb-0">&copy; 2025 Kea Med College. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/scroll-to-top.js"></script>
+    <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script>
+    // Animate elements when they come into view
+    document.addEventListener('DOMContentLoaded', function() {
+        animateOnScroll();
+        loadNews();
+        
+        // Check if we came from the homepage
+        const referrer = document.referrer;
+        if (referrer && referrer.includes('index.html')) {
+            document.getElementById('dependencyCheck').style.display = 'block';
+        }
+        
+        // Set up hidden admin access
+        setupHiddenAdminAccess();
+    });
+    
+    // Function to set up hidden admin access
+    function setupHiddenAdminAccess() {
+        const adminTrigger = document.getElementById('adminAccessTrigger');
+        
+        // Double-click on the hidden trigger to access admin login
+        adminTrigger.addEventListener('dblclick', function() {
+            window.location.href = 'login.html';
+        });
+        
+        // Keyboard shortcut: Ctrl+Shift+A to access admin login
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.shiftKey && e.key === 'A') {
+                e.preventDefault();
+                window.location.href = 'login.html';
+            }
+        });
+    }
+    
+    function animateOnScroll() {
+        const animateElements = document.querySelectorAll('.animate-section, .animate-element');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        animateElements.forEach(element => {
+            observer.observe(element);
+        });
+    }
+    </script>
+    <script>
+const API_BASE_URL = "http://localhost:3002/api";
+const headers = { "Content-Type": "application/json" };
+
+// Listen for news updates
+window.addEventListener('storage', function(e) {
+  if (e.key === 'newsUpdated') {
+    loadNews(); // Reload news when updated
+  }
+});
+
+// Load news specifically for the news page
+async function loadNews() {
+  try {
+    // Fetch all news data
+    const response = await fetch(`${API_BASE_URL}/news`, { method: "GET", headers });
+
+    if (!response.ok) {
+      throw new Error(`Failed to load news: ${response.status} ${response.statusText}`);
+    }
+
+    const news = await response.json();
+
+    // Render news to the page
+    renderNewsPage(news);
+  } catch (error) {
+    console.error("Error loading news:", error);
+    const container = document.getElementById("newsContainer");
+    if (container) {
+      container.innerHTML = `<p class="text-center text-danger">Error loading news. Please try again later.</p>`;
+    }
+  }
+}
+
+// Render news cards specifically for the news page
+function renderNewsPage(news) {
+  const newsContainer = document.getElementById("newsContainer");
+  if (!newsContainer) {
+    console.warn("Element with id 'newsContainer' not found!");
+    return;
+  }
+
+  // If no news available
+  if (!news || news.length === 0) {
+    newsContainer.innerHTML = `
+      <div class="col-12">
+        <div class="no-news-placeholder">
+          <i class="fas fa-newspaper"></i>
+          <h3>No News Available</h3>
+          <p class="text-muted">Check back later for updates and announcements.</p>
+        </div>
+      </div>
+    `;
+    return;
+  }
+
+  // Create HTML for each news item with click functionality
+  const newsHTML = news
+    .map(n => {
+      // Format date safely
+      let formattedDate = "";
+      if (n.created_at) {
+        try {
+          formattedDate = new Date(n.created_at).toLocaleDateString();
+        } catch (e) {
+          console.error("Error formatting date:", e);
+          formattedDate = n.created_at;
+        }
+      }
+      
+      // Truncate content safely
+      let truncatedContent = "";
+      let showReadMore = false;
+      if (n.content) {
+        if (n.content.length > 150) {
+          truncatedContent = n.content.substring(0, 150) + '...';
+          showReadMore = true;
+        } else {
+          truncatedContent = n.content;
+        }
+      }
+      
+      return `
+        <div class="col-md-4 mb-4 animate-element">
+          <div class="card news-card h-100 shadow-sm">
+            <div class="position-relative">
+              ${n.featured_image ? 
+                `<img src="../backend/uploads/${n.featured_image}" class="card-img-top" alt="${n.title || 'News image'}">` : 
+                `<div class='bg-light text-center py-5 position-relative' style="height: 200px;">
+                   <i class='fas fa-image fa-3x text-muted'></i>
+                   <p class="mt-2 text-muted">No image available</p>
+                 </div>`}
+              <div class="image-overlay">
+                <i class="fas fa-eye"></i>
+              </div>
+            </div>
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title"><a class="card-title" onclick="showNewsDetail(${n.id})">${n.title || 'Untitled News'}</a></h5>
+              <p class="card-text flex-grow-1">${truncatedContent}</p>
+              ${showReadMore ? `<button class="btn-read-more" onclick="showNewsDetail(${n.id})">Read More</button>` : ''}
+              <div class="mt-auto">
+                <span class="news-date">
+                  <i class="fas fa-calendar me-1"></i> ${formattedDate}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    })
+    .join("");
+
+  newsContainer.innerHTML = newsHTML;
+}
+
+// Function to show news detail
+function showNewsDetail(newsId) {
+  // Redirect to news detail page with news ID as parameter
+  window.location.href = `news-detail.html?id=${newsId}`;
+}
+
+// Load news when the page is ready
+document.addEventListener("DOMContentLoaded", loadNews);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - Kea Med College</title>
+    <link rel="shortcut icon" href="image/logo.png" type="image/png">
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        /* Page header animation */
+        .page-header {
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        /* Gallery animations */
+        .gallery-item {
+            transition: all 0.3s ease;
+            transform: translateY(20px);
+            opacity: 0;
+        }
+        
+        .gallery-item.visible {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .gallery-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 10px;
+            transition: 0.3s ease-in-out;
+        }
+        
+        .gallery-img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+        }
+        
+        .gallery-item-inner:hover .overlay {
+            opacity: 1;
+        }
+        
+        .overlay span {
+            font-size: 1.2rem;
+            text-align: center;
+        }
+        
+        .overlay p {
+            font-size: 0.9rem;
+            text-align: center;
+        }
+        
+        /* Modal styles */
+        .modal-img {
+            max-width: 100%;
+            max-height: 80vh;
+            border-radius: 10px;
+        }
+        
+        .modal-content {
+            border: none;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+        
+        /* Staggered animation delays */
+        .gallery-item:nth-child(1) { transition-delay: 0.1s; }
+        .gallery-item:nth-child(2) { transition-delay: 0.2s; }
+        .gallery-item:nth-child(3) { transition-delay: 0.3s; }
+        .gallery-item:nth-child(4) { transition-delay: 0.4s; }
+        .gallery-item:nth-child(5) { transition-delay: 0.5s; }
+        .gallery-item:nth-child(6) { transition-delay: 0.6s; }
+        .gallery-item:nth-child(7) { transition-delay: 0.7s; }
+        .gallery-item:nth-child(8) { transition-delay: 0.8s; }
+        .gallery-item:nth-child(9) { transition-delay: 0.9s; }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+            <img src="image/logo.png" alt="Logo" width="40" height="40" class="me-2">
+                KEA-MED COLLEGE
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="news.html">News</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="about.html" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            About
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
+                            <li><a class="dropdown-item" href="about.html">About our Organization</a></li>
+                            <li><a class="dropdown-item" href="structure.html">Organization Structure</a></li>
+                            <li><a class="dropdown-item" href="gallery.html">Our Campus & Activities</a></li>
+                        </ul>
+                    </li>                    <li class="nav-item"><a class="nav-link" href="admission.html">Admission</a></li>
+                    <li class="nav-item"><a class="nav-link" href="academics.html">Academics</a></li>
+                    <li class="nav-item"><a class="nav-link" href="research.html">Research</a></li>
+                    <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="comments.html">Feedback</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <style>
+        .dropdown-menu {
+            border: none;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+            border-radius: 0.5rem;
+            margin-top: 0.5rem;
+            padding: 0.5rem 0;
+            min-width: 200px;
+            background-color: #fff;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .dropdown-item {
+            padding: 0.75rem 1.5rem;
+            transition: all 0.3s ease;
+            color: #333;
+            font-weight: 500;
+        }
+        
+        .dropdown-item:hover {
+            background-color: #0d6efd;
+            color: #fff !important;
+            transform: translateX(5px);
+        }
+        
+        .dropdown-item:first-child {
+            border-radius: 0.5rem 0.5rem 0 0;
+        }
+        
+        .dropdown-item:last-child {
+            border-radius: 0 0 0.5rem 0.5rem;
+        }
+        
+        .nav-link.dropdown-toggle::after {
+            transition: transform 0.3s ease;
+        }
+        
+        .nav-link.dropdown-toggle:hover::after {
+            transform: translateY(2px);
+        }
+        
+        .dropdown:hover .dropdown-menu {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+
+    <!-- Page Header -->
+    <section class="page-header bg-primary text-white py-5 mt-5 animate-on-scroll">
+        <div class="container">
+            <h1 class="display-4">College Gallery</h1>
+            <p class="lead">A glimpse into student life, campus, events, and achievements</p>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <div class="container py-5">
+        <h2 class="text-center mb-4 animate-on-scroll">Our Campus & Activities</h2>
+        <div class="row g-4">
+            
+            <!-- Gallery Item 1 -->
+            <div class="col-md-4 col-sm-6 mb-4 gallery-item">
+                <div class="position-relative overflow-hidden rounded shadow-sm gallery-item-inner" 
+                     data-title="Nursing Program" 
+                     data-description="Demonstrate proper techniques like wound care, injection administration, patient positioning, vitals assessment">
+                    <img src="image/n11.jpg" class="img-fluid gallery-img" alt="Nursing Program">
+                    <div class="overlay d-flex flex-column justify-content-center align-items-center p-3">
+                        <span class="text-white fw-bold mb-2">Nursing Program</span>
+                        <p class="text-white text-center small mb-0">Clinical Skills Practice</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gallery Item 2 -->
+            <div class="col-md-4 col-sm-6 mb-4 gallery-item">
+                <div class="position-relative overflow-hidden rounded shadow-sm gallery-item-inner" 
+                     data-title="Nursing Program" 
+                     data-description="Demonstrations help reinforce best practices, which leads to: Better patient safety, Higher quality of care">
+                    <img src="image/n22.jpg" class="img-fluid gallery-img" alt="Pharmacy Research">
+                    <div class="overlay d-flex flex-column justify-content-center align-items-center p-3">
+                        <span class="text-white fw-bold mb-2">Nursing Program</span>
+                        <p class="text-white text-center small mb-0">Better Patient Safety</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gallery Item 3 -->
+            <div class="col-md-4 col-sm-6 mb-4 gallery-item">
+                <div class="position-relative overflow-hidden rounded shadow-sm gallery-item-inner" 
+                     data-title="Nursing Program" 
+                     data-description="Demonstrations can teach patients or families: How to take medications, How to change dressings, How to manage chronic conditions">
+                    <img src="image/n33.jpg" class="img-fluid gallery-img" alt="Nursing Graduation">
+                    <div class="overlay d-flex flex-column justify-content-center align-items-center p-3">
+                        <span class="text-white fw-bold mb-2">Nursing Program</span>
+                        <p class="text-white text-center small mb-0">HIgher Quality of Care</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gallery Item 4 -->
+            <div class="col-md-4 col-sm-6 mb-4 gallery-item">
+                <div class="position-relative overflow-hidden rounded shadow-sm gallery-item-inner" 
+                     data-title="Medical Laboratory Program" 
+                     data-description="Demonstration helps teach proper lab procedures and techniques.">
+                    <img src="image/l1.jpg" class="img-fluid gallery-img" alt="Clinical Training">
+                    <div class="overlay d-flex flex-column justify-content-center align-items-center p-3">
+                        <span class="text-white fw-bold mb-2">Medical Laboratory Program</span>
+                        <p class="text-white text-center small mb-0">Diagnostic Quality</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gallery Item 5 -->
+            <div class="col-md-4 col-sm-6 mb-4 gallery-item">
+                <div class="position-relative overflow-hidden rounded shadow-sm gallery-item-inner" 
+                     data-title="Medical Laboratory Program" 
+                     data-description="it improves laboratory skills, safety, and diagnostic quality.">
+                    <img src="image/l2.jpg" class="img-fluid gallery-img" alt="Nursing Labs">
+                    <div class="overlay d-flex flex-column justify-content-center align-items-center p-3">
+                        <span class="text-white fw-bold mb-2">Medical Laboratory Program</span>
+                        <p class="text-white text-center small mb-0">Laboratory Skills</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gallery Item 6 -->
+            <div class="col-md-4 col-sm-6 mb-4 gallery-item">
+                <div class="position-relative overflow-hidden rounded shadow-sm gallery-item-inner" 
+                     data-title="Medical Laboratory Program" 
+                     data-description="It allows students or trainees to practice tests safely before real work.">
+                    <img src="image/l3.jpg" class="img-fluid gallery-img" alt="Student Research">
+                    <div class="overlay d-flex flex-column justify-content-center align-items-center p-3">
+                        <span class="text-white fw-bold mb-2">Medical Laboratory Program</span>
+                        <p class="text-white text-center small mb-0">Diagnostic Quality.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gallery Item 7 -->
+            <div class="col-md-4 col-sm-6 mb-4 gallery-item">
+                <div class="position-relative overflow-hidden rounded shadow-sm gallery-item-inner" 
+                     data-title="Pharmacy Labs" 
+                     data-description="It helps students practice skills safely before real pharmacy work">
+                    <img src="image/p1.jpg" class="img-fluid gallery-img" alt="Campus Life">
+                    <div class="overlay d-flex flex-column justify-content-center align-items-center p-3">
+                        <span class="text-white fw-bold mb-2">Pharmacy Programs</span>
+                        <p class="text-white text-center small mb-0">proper medication handling and dispensing.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gallery Item 8 -->
+            <div class="col-md-4 col-sm-6 mb-4 gallery-item">
+                <div class="position-relative overflow-hidden rounded shadow-sm gallery-item-inner" 
+                     data-title="Pharmacy Labs" 
+                     data-description="Advanced pharmaceutical research laboratories where students develop new medication formulations.">
+                    <img src="image/p2.jpg" class="img-fluid gallery-img" alt="Pharmacy Labs">
+                    <div class="overlay d-flex flex-column justify-content-center align-items-center p-3">
+                        <span class="text-white fw-bold mb-2">Pharmacy Programs</span>
+                        <p class="text-white text-center small mb-0">Medication Development</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gallery Item 9 -->
+            <div class="col-md-4 col-sm-6 mb-4 gallery-item">
+                <div class="position-relative overflow-hidden rounded shadow-sm gallery-item-inner" 
+                     data-title="Pharmacy Labs" 
+                     data-description="it improves safety and quality in medication management.">
+                    <img src="image/p3.jpg" class="img-fluid gallery-img" alt="Nursing Simulation">
+                    <div class="overlay d-flex flex-column justify-content-center align-items-center p-3">
+                        <span class="text-white fw-bold mb-2">Pharmacy Programs</span>
+                        <p class="text-white text-center small mb-0">check accuracy and competency.</p>
+                    </div>
+                </div>
+            </div>
+
+             <!-- Gallery Item 10 -->
+            <div class="col-md-4 col-sm-6 mb-4 gallery-item">
+                <div class="position-relative overflow-hidden rounded shadow-sm gallery-item-inner" 
+                     data-title="Web Development & Database Administartion" 
+                     data-description="Practice real-world projects, like building apps, designing APIs, or optimizing databases.">
+                    <img src="image/w1.jpg" class="img-fluid gallery-img" alt="Nursing Simulation">
+                    <div class="overlay d-flex flex-column justify-content-center align-items-center p-3">
+                        <span class="text-white fw-bold mb-2">Web Development & Database Administartion</span>
+                        <p class="text-white text-center small mb-0">Practice real-world projects</p>
+                    </div>
+                </div>
+            </div>
+
+             <!-- Gallery Item 11 -->
+            <div class="col-md-4 col-sm-6 mb-4 gallery-item">
+                <div class="position-relative overflow-hidden rounded shadow-sm gallery-item-inner" 
+                     data-title="Web Development & Database Administartion" 
+                     data-description="Show how databases are created, maintained, and connected to web applications.">
+                    <img src="image/w4.jpg" class="img-fluid gallery-img" alt="Nursing Simulation">
+                    <div class="overlay d-flex flex-column justify-content-center align-items-center p-3">
+                        <span class="text-white fw-bold mb-2">Web Development & Database Administartion</span>
+                        <p class="text-white text-center small mb-0">Assess technical skills</p>
+                    </div>
+                </div>
+            </div>
+
+             <!-- Gallery Item 12 -->
+            <div class="col-md-4 col-sm-6 mb-4 gallery-item">
+                <div class="position-relative overflow-hidden rounded shadow-sm gallery-item-inner" 
+                     data-title="Web Development & Database Administartion" 
+                     data-description="Teach how to build and manage websites, including front-end and back-end functions.">
+                    <img src="image/w3.jpg" class="img-fluid gallery-img" alt="Nursing Simulation">
+                    <div class="overlay d-flex flex-column justify-content-center align-items-center p-3">
+                        <span class="text-white fw-bold mb-2">Web Development & Database Administartion</span>
+                        <p class="text-white text-center small mb-0">Teach how to build and manage websites</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Popup -->
+    <div class="modal fade" id="galleryModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header border-0">
+                    <h4 class="modal-title" id="modalTitle">Image Title</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <img id="modalImage" class="modal-img mb-3" src="" alt="Gallery Image">
+                    <p id="modalDescription" class="text-muted">Image Description</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-primary text-white py-3"> <!-- Further reduced padding from py-4 to py-3 -->
+        <div class="container footer">
+            <div class="row">
+                <div class="col-md-4 mb-3 mb-md-0"> <!-- Reduced margin -->
+                    <h5>Kea-Med College</h5>
+                    <p class="small">Excellence in Medical Education Since 1999</p>
+                    <p class="small">Medical College Debre Birhan Campus </p>
+                    <p class="small"><b>Contact:</b> <a href="https://mail.google.com/mail/?view=cm&fs=1&to=info@keamedcollegedb@gmail.com" target="_blank" class="text-white">keamedcollegedb@gmail.com</a> </p>
+                    <p class="small"><B>Phone: 011 681 3528</B></p>
+                    <div class="mt-2"> <!-- Reduced margin -->
+                        <a href="https://www.facebook.com/share/1BS2zgxFmc/" target="_blank" class="me-2 social-icon"><i class="fab fa-facebook fa-lg"></i></a> <!-- Reduced margin -->
+                        <a href="https://www.twitter.com" target="_blank" class="me-2 social-icon"><i class="fab fa-twitter fa-lg"></i></a> <!-- Reduced margin -->
+                        <a href="https://www.linkedin.com" target="_blank" class="me-2 social-icon"><i class="fab fa-linkedin fa-lg"></i></a> <!-- Reduced margin -->
+                        <a href="https://www.instagram.com" target="_blank" class="me-2 social-icon"><i class="fab fa-instagram fa-lg"></i></a>
+                        <a href="https://www.tiktok.com" target="_blank" class="social-icon"><i class="fab fa-tiktok fa-lg"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3 mb-md-0"> <!-- Reduced margin -->
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled footer-links">
+                        <li><a href="index.html"><i class="fas fa-angle-right me-2"></i>Home</a></li>
+                        <li><a href="about.html"><i class="fas fa-angle-right me-2"></i>About Us</a></li>
+                        <li><a href="admission.html"><i class="fas fa-angle-right me-2"></i>Admissions</a></li>
+                        <li><a href="academics.html"><i class="fas fa-angle-right me-2"></i>Academics</a></li>
+                        <li><a href="research.html"><i class="fas fa-angle-right me-2"></i>Research</a></li>
+                        <li><a href="services.html"><i class="fas fa-angle-right me-2"></i>Services</a></li>
+                        <li><a href="comments.html"><i class="fas fa-angle-right me-2"></i>Contact & Feedback</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Our Location</h5>
+                    <div class="ratio ratio-16x9 mb-2">
+                        <iframe src="https://maps.google.com/maps?q=Kea%20Med%20College&output=embed" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                    <p class="small"><a href="https://maps.app.goo.gl/GXQb63d85wi9L3yG7" target="_blank" rel="noopener noreferrer" class="text-white">Open in Google Maps</a></p>
+                </div>
+            </div>
+            <hr class="my-3"> <!-- Reduced margin -->
+            <div class="text-center copyright position-relative">
+                <p class="mb-0">&copy; 2025 Kea Med College. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/scroll-to-top.js"></script>
+    <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Animate gallery items on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize animations
+            animateOnScroll();
+            
+            // Add click event to gallery items
+            const galleryItems = document.querySelectorAll('.gallery-item-inner');
+            const modal = new bootstrap.Modal(document.getElementById('galleryModal'));
+            const modalImage = document.getElementById('modalImage');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalDescription = document.getElementById('modalDescription');
+            
+            galleryItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Get data attributes
+                    const title = this.getAttribute('data-title');
+                    const description = this.getAttribute('data-description');
+                    const imgSrc = this.querySelector('img').getAttribute('src');
+                    const imgAlt = this.querySelector('img').getAttribute('alt');
+                    
+                    // Set modal content
+                    modalTitle.textContent = title;
+                    modalDescription.textContent = description;
+                    modalImage.src = imgSrc;
+                    modalImage.alt = imgAlt;
+                    
+                    // Show modal
+                    modal.show();
+                });
+            });
+        });
+        
+        // Animate elements when they come into view
+        function animateOnScroll() {
+            const animateElements = document.querySelectorAll('.gallery-item, .animate-on-scroll');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            animateElements.forEach(element => {
+                observer.observe(element);
+            });
+        }
+    </script>
+
+</body>
+</html>

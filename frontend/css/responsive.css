@@ -1,0 +1,51 @@
+/* Mobile First Approach */
+@media (max-width: 768px) {
+    .hero-banner {
+        padding: 60px 0;
+        text-align: center;
+    }
+    
+    .hero-banner h1 {
+        font-size: 2rem;
+    }
+    
+    .navbar-brand {
+        font-size: 1.2rem;
+    }
+    
+    .card {
+        margin-bottom: 1rem;
+    }
+    
+    .btn {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .container {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    
+    .news-card img {
+        height: 150px;
+    }
+    
+    .modal-dialog {
+        margin: 20px;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .navbar, .btn, footer, .no-print {
+        display: none !important;
+    }
+    
+    .container {
+        width: 100%;
+        max-width: none;
+    }
+}

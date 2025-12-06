@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Structure - Kea Med College</title>
+    <link rel="shortcut icon" href="image/logo.png" type="image/png">
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .gallery-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 10px;
+            transition: 0.3s ease-in-out;
+        }
+        .gallery-img:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+            <img src="image/logo.png" alt="Logo" width="40" height="40" class="me-2">
+                KEA-MED COLLEGE
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="news.html">News</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="about.html" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            About
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
+                            <li><a class="dropdown-item" href="about.html">About our Organization</a></li>
+                            <li><a class="dropdown-item" href="structure.html">Organization Structure</a></li>
+                            <li><a class="dropdown-item" href="gallery.html">Our Campus & Activities</a></li>
+                        </ul>
+                    </li>                    <li class="nav-item"><a class="nav-link" href="admission.html">Admission</a></li>
+                    <li class="nav-item"><a class="nav-link" href="academics.html">Academics</a></li>
+                    <li class="nav-item"><a class="nav-link" href="research.html">Research</a></li>
+                    <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="comments.html">Feedback</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <style>
+        .dropdown-menu {
+            border: none;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+            border-radius: 0.5rem;
+            margin-top: 0.5rem;
+            padding: 0.5rem 0;
+            min-width: 200px;
+            background-color: #fff;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .dropdown-item {
+            padding: 0.75rem 1.5rem;
+            transition: all 0.3s ease;
+            color: #333;
+            font-weight: 500;
+        }
+        
+        .dropdown-item:hover {
+            background-color: #0d6efd;
+            color: #fff !important;
+            transform: translateX(5px);
+        }
+        
+        .dropdown-item:first-child {
+            border-radius: 0.5rem 0.5rem 0 0;
+        }
+        
+        .dropdown-item:last-child {
+            border-radius: 0 0 0.5rem 0.5rem;
+        }
+        
+        .nav-link.dropdown-toggle::after {
+            transition: transform 0.3s ease;
+        }
+        
+        .nav-link.dropdown-toggle:hover::after {
+            transform: translateY(2px);
+        }
+        
+        .dropdown:hover .dropdown-menu {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+
+    <!-- Page Header -->
+    <section class="page-header bg-primary text-white py-5 mt-5">
+        <div class="container">
+            <h1 class="display-4">Organization Structure</h1>
+            <p class="lead">Understanding our institutional framework</p>
+        </div>
+    </section>
+
+    <!-- Organization Structure Content -->
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-12">
+                <p class="lead mb-4">
+                    This structure provides a clear, visual representation of the Kea Med College Debrebirhane Campus organizational hierarchy with proper reporting lines, departmental relationships, and functional groupings.
+                </p>
+                
+                <div class="text-center">
+                    <img src="image/struture11.png" alt="Organization Structure" class="img-fluid rounded shadow" style="max-width: 100%; height: auto;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-primary text-white py-3">
+        <div class="container footer">
+            <div class="row">
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <h5>Kea-Med College</h5>
+                    <p class="small">Excellence in Medical Education Since 1999</p>
+                    <p class="small">Medical College Debre Birhan Campus </p>
+                    <p class="small"><b>Contact:</b> <a href="https://mail.google.com/mail/?view=cm&fs=1&to=info@keamedcollegedb@gmail.com" target="_blank" class="text-white">keamedcollegedb@gmail.com</a> </p>
+                    <p class="small"><B>Phone: 011 681 3528</B></p>
+                    <div class="mt-2">
+                        <a href="https://www.facebook.com" target="_blank" class="me-2 social-icon"><i class="fab fa-facebook fa-lg"></i></a>
+                        <a href="https://www.twitter.com" target="_blank" class="me-2 social-icon"><i class="fab fa-twitter fa-lg"></i></a>
+                        <a href="https://www.linkedin.com" target="_blank" class="me-2 social-icon"><i class="fab fa-linkedin fa-lg"></i></a>
+                        <a href="https://www.instagram.com" target="_blank" class="me-2 social-icon"><i class="fab fa-instagram fa-lg"></i></a>
+                        <a href="https://www.tiktok.com" target="_blank" class="social-icon"><i class="fab fa-tiktok fa-lg"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled footer-links">
+                        <li><a href="index.html"><i class="fas fa-angle-right me-2"></i>Home</a></li>
+                        <li><a href="about.html"><i class="fas fa-angle-right me-2"></i>About Us</a></li>
+                        <li><a href="admission.html"><i class="fas fa-angle-right me-2"></i>Admissions</a></li>
+                        <li><a href="academics.html"><i class="fas fa-angle-right me-2"></i>Academics</a></li>
+                        <li><a href="research.html"><i class="fas fa-angle-right me-2"></i>Research</a></li>
+                        <li><a href="services.html"><i class="fas fa-angle-right me-2"></i>Services</a></li>
+                        <li><a href="comments.html"><i class="fas fa-angle-right me-2"></i>Contact & Feedback</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Our Location</h5>
+                    <div class="ratio ratio-16x9 mb-2">
+                        <iframe src="https://maps.google.com/maps?q=Kea%20Med%20College&output=embed" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                    <p class="small"><a href="https://maps.app.goo.gl/GXQb63d85wi9L3yG7" target="_blank" rel="noopener noreferrer" class="text-white">Open in Google Maps</a></p>
+                </div>
+            </div>
+            <hr class="my-3">
+            <div class="text-center copyright position-relative">
+                <p class="mb-0">&copy; 2025 Kea Med College. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/scroll-to-top.js"></script>
+    <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
