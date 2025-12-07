@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS feedback (
       allow_contact BOOLEAN DEFAULT false,
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
-     CREATE TABLE IF NOT EXISTS applications (
+   CREATE TABLE IF NOT EXISTS applications (
             id INT AUTO_INCREMENT PRIMARY KEY,
             fullName VARCHAR(255) NOT NULL,
             email VARCHAR(255) NOT NULL,
